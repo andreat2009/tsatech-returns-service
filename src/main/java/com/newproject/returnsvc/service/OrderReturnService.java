@@ -6,6 +6,7 @@ import com.newproject.returnsvc.dto.OrderReturnResponse;
 import com.newproject.returnsvc.events.EventPublisher;
 import com.newproject.returnsvc.exception.NotFoundException;
 import com.newproject.returnsvc.repository.OrderReturnRepository;
+import com.newproject.returnsvc.security.RequestActor;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,14 +17,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderReturnService {
     private final OrderReturnRepository orderReturnRepository;
     private final EventPublisher eventPublisher;
+    private final RequestActor requestActor;
 
-    public OrderReturnService(OrderReturnRepository orderReturnRepository, EventPublisher eventPublisher) {
+    public OrderReturnService(OrderReturnRepository orderReturnRepository, EventPublisher eventPublisher, RequestActor requestActor) {
         this.orderReturnRepository = orderReturnRepository;
         this.eventPublisher = eventPublisher;
+        this.requestActor = requestActor;
     }
 
     @Transactional
     public OrderReturnResponse create(OrderReturnRequest request) {
+        requestActor.assertCustomerAccessIfAuthenticated(request.getCustomerId());
         OrderReturn orderReturn = new OrderReturn();
         orderReturn.setOrderId(request.getOrderId());
         orderReturn.setOrderItemId(request.getOrderItemId());
@@ -42,6 +46,16 @@ public class OrderReturnService {
 
     @Transactional(readOnly = true)
     public List<OrderReturnResponse> list(Long customerId, Long orderId) {
+        if (requestActor.isAuthenticated() && !requestActor.isAdmin()) {
+            Long scopedCustomerId = requestActor.resolveScopedCustomerId(customerId);
+            List<OrderReturn> scopedReturns = orderId != null
+                ? orderReturnRepository.findByOrderIdOrderByCreatedAtDesc(orderId).stream()
+                    .filter(item -> scopedCustomerId.equals(item.getCustomerId()))
+                    .toList()
+                : orderReturnRepository.findByCustomerIdOrderByCreatedAtDesc(scopedCustomerId);
+            return scopedReturns.stream().map(this::toResponse).collect(Collectors.toList());
+        }
+
         List<OrderReturn> returns;
         if (orderId != null) {
             returns = orderReturnRepository.findByOrderIdOrderByCreatedAtDesc(orderId);
@@ -55,6 +69,7 @@ public class OrderReturnService {
 
     @Transactional
     public OrderReturnResponse setStatus(Long id, String status) {
+        requestActor.assertAdmin();
         OrderReturn orderReturn = orderReturnRepository.findById(id)
             .orElseThrow(() -> new NotFoundException("Order return not found"));
 
