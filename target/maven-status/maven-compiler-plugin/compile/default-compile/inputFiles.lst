@@ -1,0 +1,14 @@
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/ReturnsServiceApplication.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/config/SecurityConfig.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/controller/OrderReturnController.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/domain/OrderReturn.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/dto/OrderReturnRequest.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/dto/OrderReturnResponse.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/error/ApiErrorResponse.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/error/GlobalApiExceptionHandler.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/events/DomainEvent.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/events/EventPublisher.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/exception/NotFoundException.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/repository/OrderReturnRepository.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/security/RequestActor.java
+/Users/andreaterrasi/Desktop/sviluppo/workspace_claudecode/kerosstudio/ecommerce/returns-service/src/main/java/com/newproject/returnsvc/service/OrderReturnService.java
